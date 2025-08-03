@@ -5,11 +5,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 10000; // Render 10000 port पर bind करता है
+const PORT = process.env.PORT || 3000;
 
 // Root route
 app.get("/", (req, res) => {
   res.json({ status: "ok", message: "Backend connected successfully" });
+});
+
+// Test route
+app.get("/api/test", (req, res) => {
+  res.json({ status: "ok", message: "API Test successful!" });
 });
 
 // Signup route
