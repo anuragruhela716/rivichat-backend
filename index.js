@@ -16,7 +16,7 @@ app.post("/api/signup", (req, res) => {
   const { email, password } = req.body;
 
   // अभी हम database नहीं जोड़ रहे हैं, केवल success response भेज रहे हैं
-  res.json({ status: "ok", message: User ${email} signed up successfully });
+  res.json({ status: "ok", message: `User ${email} signed up successfully` });
 });
 
 // Login API
