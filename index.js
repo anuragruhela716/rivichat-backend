@@ -1,32 +1,38 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware for parsing JSON
+app.use(express.json());
 
-// Test API
-app.get("/api/test", (req, res) => {
-  res.json({ status: "ok", message: "Backend connected successfully!" });
+// Root route
+app.get("/", (req, res) => {
+  res.send("Backend connected successfully");
 });
 
-// Signup API
+// Signup route
 app.post("/api/signup", (req, res) => {
   const { email, password } = req.body;
 
-  // अभी हम database नहीं जोड़ रहे हैं, केवल success response भेज रहे हैं
-  res.json({ status: "ok", message: `User ${email} signed up successfully` });
+  // यहां तुम DB में user को save करने का code लिख सकते हो (future में)
+  res.json({
+    status: "ok",
+    message: `User ${email} signed up successfully`
+  });
 });
 
-// Login API
+// Login route (optional)
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
-  // यहां भी database नहीं है, simple success message देंगे
-  res.json({ status: "ok", message: Welcome back ${email} });
+  // यहां authentication का code होगा (future में)
+  res.json({
+    status: "ok",
+    message: `User ${email} logged in successfully`
+  });
 });
 
+// Port config
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
