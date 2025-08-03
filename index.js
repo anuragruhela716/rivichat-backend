@@ -1,6 +1,6 @@
-Const express = require("express");
-Const app = express();
-Const port = process.env.PORT || 3000;
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
 
 app.get("/api/test", (req, res) => {
   res.json({ status: "ok", message: "Backend connected successfully!" });
