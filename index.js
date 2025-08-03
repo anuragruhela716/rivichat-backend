@@ -1,38 +1,39 @@
 const express = require("express");
-const app = express();
+const cors = require("cors");
 
-// Middleware for parsing JSON
+const app = express();
+app.use(cors());
 app.use(express.json());
+
+const PORT = process.env.PORT || 3000;
 
 // Root route
 app.get("/", (req, res) => {
-  res.send("Backend connected successfully");
+  res.json({ status: "ok", message: "Backend connected successfully" });
 });
 
 // Signup route
 app.post("/api/signup", (req, res) => {
   const { email, password } = req.body;
 
-  // यहां तुम DB में user को save करने का code लिख सकते हो (future में)
-  res.json({
-    status: "ok",
-    message: `User ${email} signed up successfully`
-  });
+  if (!email || !password) {
+    return res.status(400).json({ status: "error", message: "Email and Password are required" });
+  }
+
+  res.json({ status: "ok", message: `User ${email} signed up successfully` });
 });
 
-// Login route (optional)
+// Login route
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
-  // यहां authentication का code होगा (future में)
-  res.json({
-    status: "ok",
-    message: `User ${email} logged in successfully`
-  });
+  if (!email || !password) {
+    return res.status(400).json({ status: "error", message: "Email and Password are required" });
+  }
+
+  res.json({ status: "ok", message: `User ${email} logged in successfully` });
 });
 
-// Port config
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
