@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000; // Render 10000 port पर bind करता है
 
 // Root route
 app.get("/", (req, res) => {
@@ -17,7 +17,9 @@ app.post("/api/signup", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ status: "error", message: "Email and Password are required" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "Email and Password are required" });
   }
 
   res.json({ status: "ok", message: `User ${email} signed up successfully` });
@@ -28,10 +30,12 @@ app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ status: "error", message: "Email and Password are required" });
+    return res
+      .status(400)
+      .json({ status: "error", message: "Email and Password are required" });
   }
 
-  res.json({ status: "ok", message: `User ${email} logged in successfully` });
+  res.json({ status: "ok", message: `Welcome back ${email}` });
 });
 
 app.listen(PORT, () => {
